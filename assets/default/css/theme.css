@@ -394,7 +394,6 @@ body {
   min-height: 350px;
 }
 #footer {
-  display:none;
   text-align: center;
   font-size: 11px;
   color: #333;
@@ -406,7 +405,7 @@ body {
   margin: 10px 0 0 0;
 }
 #footer #poweredBy {
-  display: none;
+  display: block;
   width: 126px;
   height: 23px;
   outline: none;
