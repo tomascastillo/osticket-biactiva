@@ -287,12 +287,15 @@ h2, .subject {
   background-color: #0299d2;
 }
 body {
-  background: url('../images/page_bg.png') top left repeat-x #ffffff;
+  background: url('../images/page_bg.png') top left repeat-x #c8c8c8;
 }
 #container {
   background: #fff;
-  /*width: 840px;*/
+  width: 840px;
   margin: 0 auto;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 #header {
   position: relative;
@@ -320,11 +323,11 @@ body {
   padding: 10px 0 0;
 }
 #nav {
-  /*margin: 0 20px;*/
-  padding: 10px 15px;
+  margin: 0 20px;
+  padding: 2px 10px;
   height: 20px;
-  background: #6b6b6b;
-  border-top: 1px solid #424242;
+  background: url('../images/nav_bg.png') top left repeat-x;
+  border-top: 1px solid #aaa;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 3px 2px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0 3px 2px rgba(0, 0, 0, 0.4);
@@ -344,7 +347,7 @@ body {
   text-align: center;
   padding: 0 10px 0 32px;
   margin-left: 10px;
-  color: #fff;
+  color: #333;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -361,12 +364,12 @@ body {
 }
 #nav li a.active,
 #nav li a:hover {
-  background-color: #fff;
+  background-color: #dbefff;
   color: #000;
 }
 #nav li a:hover {
-  background-color: #2d2929;
-  color: #ffffff;
+  background-color: #ededed;
+  color: #0054a6;
 }
 #nav li a.home {
   background-image: url('../images/icons/home.png');
@@ -391,6 +394,7 @@ body {
   min-height: 350px;
 }
 #footer {
+  display:none;
   text-align: center;
   font-size: 11px;
   color: #333;
@@ -402,7 +406,7 @@ body {
   margin: 10px 0 0 0;
 }
 #footer #poweredBy {
-  display: block;
+  display: none;
   width: 126px;
   height: 23px;
   outline: none;

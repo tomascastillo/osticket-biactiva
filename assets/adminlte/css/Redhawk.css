@@ -1,0 +1,65 @@
+.brandlogo-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: -2px;
+    background-color: #ffffff;
+}
+
+#navbar-collapse ul li a {
+    padding-left: 32px;
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+}
+#navbar-collapse ul li a.home {
+    background-image: url('../../default/images/icons/home.png');
+}
+#navbar-collapse ul li a.kb{
+    background-image: url('../../default/images/icons/kb.png');
+}
+#navbar-collapse ul li a.new {
+    background-image: url('../../default/images/icons/new.png');
+}
+#navbar-collapse ul li a.status{
+    background-image: url('../../default/images/icons/status.png');
+}
+#navbar-collapse ul li a.tickets{
+    background-image: url('../../default/images/icons/tix.png');
+}
+.switcher {
+    z-index: 1050;
+    position: fixed;
+    top: 78px;
+    right: -240px;
+    width: 240px;
+    -webkit-transition: right 0.2s ease;
+    transition: right 0.2s ease;
+    border: 1px solid rgba(120, 120, 120, 0.1);
+    background-clip: padding-box; }
+    .switcher.active {
+      right: -2px;
+      z-index: 1060; }
+  
+  .switcher .sw-btn {
+    position: absolute;
+    left: -43px;
+    top: -1px;
+    padding: 10px 15px;
+    z-index: 1045;
+    border: 1px solid rgba(120, 120, 120, 0.1);
+    border-right-width: 0;
+    background-clip: padding-box; }
+.p-a {
+    padding: 1rem !important; 
+}
+.pointer {
+    cursor: pointer;
+}
+.m-a-0 {
+    margin: 0 0 !important;
+}
+.col-xs-6 {
+    float: left;
+    width: 50%;
+}

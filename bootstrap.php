@@ -197,6 +197,7 @@ class Bootstrap {
         require(INCLUDE_DIR.'class.model.php');
         require(INCLUDE_DIR.'class.user.php');
         require(INCLUDE_DIR.'class.auth.php');
+        require(INCLUDE_DIR.'class.themes.php');
         require(INCLUDE_DIR.'class.pagenate.php'); //Pagenate helper!
         require(INCLUDE_DIR.'class.log.php');
         require(INCLUDE_DIR.'class.crypto.php');

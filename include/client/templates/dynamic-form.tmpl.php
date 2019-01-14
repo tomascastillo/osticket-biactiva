@@ -3,12 +3,11 @@
     // space below.
     // XXX: Would be nice to handle the decoration with a CSS class
     ?>
-    <tr><td colspan="2"><hr />
-    <div class="form-header" style="margin-bottom:0.5em">
-    <h3><?php echo Format::htmlchars($form->getTitle()); ?></h3>
-    <div><?php echo Format::display($form->getInstructions()); ?></div>
+    <div class="box-header with-border">
+        <h3 class="box-title"><?php echo Format::htmlchars($form->getTitle()); ?>
+        <small><?php echo Format::display($form->getInstructions()); ?></small></h3>
     </div>
-    </td></tr>
+    <div class="box-body">
     <?php
     // Form fields, each with corresponding errors follows. Fields marked
     // 'private' are not included in the output for clients
@@ -22,16 +21,16 @@
             continue;
         }
         ?>
-        <tr>
-            <td colspan="2" style="padding-top:10px;">
+        
             <?php if (!$field->isBlockLevel()) { ?>
+                <div class="form-group">
                 <label for="<?php echo $field->getFormName(); ?>"><span class="<?php
                     if ($field->isRequiredForUsers()) echo 'required'; ?>">
-                <?php echo Format::htmlchars($field->getLocal('label')); ?>
-            <?php if ($field->isRequiredForUsers()) { ?>
-                <span class="error">*</span>
-            <?php }
-            ?></span><?php
+                        <?php echo Format::htmlchars($field->getLocal('label')); ?>
+                    <?php if ($field->isRequiredForUsers()) { ?>
+                        <span class="text-red error">*</span>
+                    <?php }
+                ?></span><?php
                 if ($field->get('hint')) { ?>
                     <br /><em style="color:gray;display:inline-block"><?php
                         echo Format::viewableImages($field->getLocal('hint')); ?></em>
@@ -41,14 +40,15 @@
             <?php
             }
             $field->render(array('client'=>true));
-            ?></label><?php
+            ?></label>
+            <?php
             foreach ($field->errors() as $e) { ?>
-                <div class="error"><?php echo $e; ?></div>
+                <div class="text-red error"><?php echo $e; ?></div>
             <?php }
             $field->renderExtras(array('client'=>true));
             ?>
-            </td>
-        </tr>
+            </div>
         <?php
     }
 ?>
+    </div>

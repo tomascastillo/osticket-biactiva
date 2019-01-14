@@ -261,6 +261,7 @@ class AdminNav extends StaffNav{
                     $subnav[]=array('desc'=>__('Forms'),'href'=>'forms.php','iconclass'=>'forms');
                     $subnav[]=array('desc'=>__('Lists'),'href'=>'lists.php','iconclass'=>'lists');
                     $subnav[]=array('desc'=>__('Plugins'),'href'=>'plugins.php','iconclass'=>'api');
+                    $subnav[]=array('desc'=>__('Themes'),'href'=>'themes.php','iconclass'=>'api');
                     break;
                 case 'emails':
                     $subnav[]=array('desc'=>__('Emails'),'href'=>'emails.php', 'title'=>__('Email Addresses'), 'iconclass'=>'emailSettings');

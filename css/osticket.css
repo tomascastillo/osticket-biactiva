@@ -12,7 +12,9 @@
 }
 
 #loading {
-    border:1px solid #2a67ac;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 25px 0px rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
     padding: 10px 10px 10px 60px;
     width: 300px;
     height: 100px;

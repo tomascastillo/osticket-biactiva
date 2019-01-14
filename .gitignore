@@ -1,0 +1,12 @@
+include/ost-config.php
+api/*
+apps/*
+kb/*
+web.config
+include/cli/*
+include/config/*
+include/i18n/*
+include/mpdf/*
+include/pear/*
+include/plugins/*
+

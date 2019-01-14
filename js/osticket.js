@@ -15,11 +15,11 @@ $(document).ready(function(){
         left    : 0
      });
 
-    /* loading ... */
+    /* loading ...*/
     $("#loading").css({
         top  : ($(window).height() / 3),
         left : ($(window).width() / 2 - 160)
-     });
+     }); 
 
     $(document).on('change', "form :input:not(.nowarn)", function() {
         var fObj = $(this).closest('form');

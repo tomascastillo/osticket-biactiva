@@ -22,6 +22,7 @@ if ($lang) {
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="x-pjax-version" content="<?php echo GIT_VERSION; ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?php echo Format::htmlchars($title); ?></title>
     <!--[if IE]>
     <style type="text/css">
@@ -45,7 +46,6 @@ if ($lang) {
     <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/select2.min.css?035fd0a"/>
     <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/rtl.css?035fd0a"/>
     <link type="text/css" rel="stylesheet" href="<?php echo ROOT_PATH ?>scp/css/translatable.css?035fd0a"/>
-
     <?php
     if($ost && ($headers=$ost->getExtraHeaders())) {
         echo "\n\t".implode("\n\t", $headers)."\n";
