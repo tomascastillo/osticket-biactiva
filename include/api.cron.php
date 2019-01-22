@@ -5,7 +5,7 @@ include_once INCLUDE_DIR.'class.cron.php';
 class CronApiController extends ApiController {
 
     function execute() {
-
+        
         if(!($key=$this->requireApiKey()) || !$key->canExecuteCron())
             return $this->exerr(401, __('API key not authorized'));
 
