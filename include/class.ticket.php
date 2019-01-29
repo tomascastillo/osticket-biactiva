@@ -1487,7 +1487,8 @@ implements RestrictedAccess, Threadable {
             $this->setSLAId(15);
             if($idSla==18&&$prioridad==1)
             $this->setSLAId(14);
-
+            if($idSla==22&&$prioridad==4)
+            $this->setSLAId(23);
             $this->save();
         }
         $vars = array_merge($options,
