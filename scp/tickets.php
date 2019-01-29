@@ -23,6 +23,7 @@ require_once(INCLUDE_DIR.'class.json.php');
 require_once(INCLUDE_DIR.'class.dynamic_forms.php');
 require_once(INCLUDE_DIR.'class.export.php');       // For paper sizes
 
+
 $page='';
 $ticket = $user = null; //clean start.
 $redirect = false;
@@ -117,6 +118,7 @@ if($_POST && !$errors):
                             sprintf('<a href="tickets.php?id=%d"><b>%s</b></a>',
                                 $ticket->getId(), $ticket->getNumber()))
                         );
+                
 
                 // Clear attachment list
                 $response_form->setSource(array());
@@ -191,6 +193,8 @@ if($_POST && !$errors):
             break;
         case 'edit':
         case 'update':
+
+        
             if(!$ticket || !$role->hasPerm(TicketModel::PERM_EDIT))
                 $errors['err']=__('Permission Denied. You are not allowed to edit tickets');
             elseif($ticket->update($_POST,$errors)) {
@@ -251,6 +255,10 @@ if($_POST && !$errors):
                     if(!$dept || !$dept->isManager($thisstaff)) {
                         $errors['err']=__('Permission Denied. You are not allowed to flag tickets');
                     } elseif($ticket->markAnswered()) {
+                        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                       
+                        
+
                         $msg=sprintf(__('Ticket flagged as answered by %s'),$thisstaff->getName());
                         $ticket->logActivity(__('Ticket Marked Answered'),$msg);
                     } else {
@@ -353,6 +361,8 @@ if ($redirect) {
     if ($msg)
         Messages::success($msg);
     Http::redirect($redirect);
+    
+    
 }
 
 /*... Quick stats ...*/
@@ -491,6 +501,40 @@ if($ticket) {
     }
 }
 
+function modificarSla($idAAct){
+    $servername = "localhost";
+$username = "osticket";
+$password = "12345678";
+$dbname = "osticket";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "SELECT ost_ticket.ticket_id,ost_ticket.isanswered,ost_ticket__cdata.priority,ost_ticket.sla_id FROM ost_ticket INNER JOIN ost_ticket__cdata ON ost_ticket.ticket_id=ost_ticket__cdata.ticket_id  WHERE ost_ticket.ticket_id=" .$idAAct;
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        if($row["isanswered"]==1&&$row["priority"]==3&&$row["sla_id"]==5){//si el sla id ya era 6, que no lo cambie
+            //update de este ticket a tal sla
+            $sql = "UPDATE ost_ticket SET sla_id=6 WHERE ticket_id=" . $row["ticket_id"];
+
+            $conn->query($sql);
+        }
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+}
+//while(true) {
+ //   sleep(100);
+//}
 require_once(STAFFINC_DIR.'header.inc.php');
 require_once(STAFFINC_DIR.$inc);
 print $response_form->getMedia();

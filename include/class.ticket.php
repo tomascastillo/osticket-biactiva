@@ -1271,6 +1271,7 @@ implements RestrictedAccess, Threadable {
         case 'closed':
             return $this->setStatus('closed');
         case 'answered':
+
             return $this->setAnsweredState(1);
         case 'unanswered':
             return $this->setAnsweredState(0);
@@ -1289,6 +1290,7 @@ implements RestrictedAccess, Threadable {
 
 
     function setAnsweredState($isanswered) {
+
         $this->isanswered = $isanswered;
         return $this->save();
     }
@@ -1460,9 +1462,34 @@ implements RestrictedAccess, Threadable {
     }
 
     function onResponse($response, $options=array()) {
+        //cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         $this->isanswered = 1;
+        
         $this->save();
+        $fueRespondido=$this->isAnswered();
+        $idSla=$this->getSLAId(); 
+        $prioridad=$this->getPriorityId();
+        if($fueRespondido){
+            if($idSla==3&&$prioridad==4)
+            $this->setSLAId(4);
+            if($idSla==5&&$prioridad==3)
+            $this->setSLAId(6);
+            if($idSla==7&&$prioridad==2)
+            $this->setSLAId(8);
+            if($idSla==9&&$prioridad==1)
+            $this->setSLAId(10);
 
+            if($idSla==21&&$prioridad==4)
+            $this->setSLAId(17);
+            if($idSla==20&&$prioridad==3)
+            $this->setSLAId(16);
+            if($idSla==19&&$prioridad==2)
+            $this->setSLAId(15);
+            if($idSla==18&&$prioridad==1)
+            $this->setSLAId(14);
+
+            $this->save();
+        }
         $vars = array_merge($options,
             array(
                 'activity' => _S('New Response'),
@@ -1540,6 +1567,7 @@ implements RestrictedAccess, Threadable {
 
         $this->isanswered = 0;
         $this->lastupdate = SqlFunction::NOW();
+
         $this->save();
 
 
@@ -2286,6 +2314,8 @@ implements RestrictedAccess, Threadable {
     function postMessage($vars, $origin='', $alerts=true) {
         global $cfg;
 
+       
+        
         if ($origin)
             $vars['origin'] = $origin;
         if (isset($vars['ip']))
@@ -2486,7 +2516,36 @@ implements RestrictedAccess, Threadable {
     /* public */
     function postReply($vars, &$errors, $alert=true, $claim=true) {
         global $thisstaff, $cfg;
+//*************************************************************+bbbbbbbbbbbbb */
 
+        $fueRespondido=$this->isAnswered();
+        $idSla=$this->getSLAId(); 
+        $prioridad=$this->getPriorityId();
+        if($fueRespondido){
+            if($idSla==3&&$prioridad==4)
+            $this->setSLAId(4);
+            if($idSla==5&&$prioridad==3)
+            $this->setSLAId(6);
+            if($idSla==7&&$prioridad==2)
+            $this->setSLAId(8);
+            if($idSla==9&&$prioridad==1)
+            $this->setSLAId(10);
+
+            if($idSla==21&&$prioridad==4)
+            $this->setSLAId(17);
+            if($idSla==20&&$prioridad==3)
+            $this->setSLAId(16);
+            if($idSla==19&&$prioridad==2)
+            $this->setSLAId(15);
+            if($idSla==18&&$prioridad==1)
+            $this->setSLAId(14);
+            if($idSla==22&&$prioridad==4)
+            $this->setSLAId(23);
+            $this->save();
+        }
+
+
+        
         if (!$vars['poster'] && $thisstaff)
             $vars['poster'] = $thisstaff;
 
@@ -2666,10 +2725,12 @@ implements RestrictedAccess, Threadable {
         $errors = array();
         switch ($type) {
         case 'M':
+        /////////////////////////**************************************************************************aaaaaaaaaaaa */
             return $this->postMessage($vars, $vars['origin']);
         case 'N':
             return $this->postNote($vars, $errors);
         case 'R':
+
             return $this->postReply($vars, $errors);
         }
     }
@@ -2740,6 +2801,55 @@ implements RestrictedAccess, Threadable {
         return parent::save($this->dirty || $refetch);
     }
 
+    function modificarSla($idAAct){
+        $myfile = fopen("sql3.txt", "w") or die("Unable to open file!");
+                fwrite($myfile,  "aaaa");
+                fclose($myfile); 
+        $servername = "localhost";
+    $username = "osticket";
+    $password = "12345678";
+    $dbname = "osticket";
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    } 
+    
+    $sql = "SELECT ost_ticket.ticket_id,ost_ticket.isanswered,ost_ticket__cdata.priority,ost_ticket.sla_id WHERE ost_ticket.ticket_id=" .$idAAct. " FROM ost_ticket INNER JOIN ost_ticket__cdata ON ost_ticket.ticket_id=ost_ticket__cdata.ticket_id";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $respond=$row["isanswered"];
+            $prior=$row["priority"];
+            $slaid=$row["sla_id"];
+            if($respond==1&&$prior==3){
+                if($slaid===11){
+                    $slaid=13;
+                }elseif($slaid==5){
+                    $slaid=6;
+                }elseif($slaid==3){
+                    $slaid=4;
+                }elseif($slaid==7){
+                    $slaid=8;
+                }elseif($slaid==9){
+                    $slaid=10;
+                }
+                $sql = "UPDATE ost_ticket SET sla_id=".$slaid." WHERE ticket_id=" . $idAAct;
+                $myfile = fopen("sql.txt", "w") or die("Unable to open file!");
+                fwrite($myfile, $sql . "aaaa");
+                fclose($myfile); 
+                $conn->query($sql);
+                
+            }else return;
+            
+        }
+    } else return;
+   
+    $conn->close();
+    }
     function update($vars, &$errors) {
         global $cfg, $thisstaff;
 
@@ -3577,6 +3687,7 @@ implements RestrictedAccess, Threadable {
             $vars['response'] = $ticket->replaceVars($vars['response']);
             // $vars['cannedatachments'] contains the attachments placed on
             // the response form.
+            
             $response = $ticket->postReply($vars, $errors, false);
         }
 
