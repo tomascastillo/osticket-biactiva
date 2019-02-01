@@ -86,6 +86,7 @@ class Export {
                 'created' =>        __('Date Created'),
                 'cdata.subject' =>  __('Subject'),
                 'user.name' =>      __('From'),
+                'user.org_id' =>      __('Organization id'),
                 'user.default_email.address' => __('From Email'),
                 'cdata.:priority.priority_desc' => __('Priority'),
                 'dept::getLocalName' => __('Department'),
@@ -398,7 +399,7 @@ class DatabaseExporter {
         FORM_SEC_TABLE, FORM_FIELD_TABLE, LIST_TABLE, LIST_ITEM_TABLE,
         FORM_ENTRY_TABLE, FORM_ANSWER_TABLE, USER_TABLE, USER_EMAIL_TABLE,
         PLUGIN_TABLE, THREAD_COLLABORATOR_TABLE, TRANSLATION_TABLE,
-        USER_ACCOUNT_TABLE, ORGANIZATION_TABLE, NOTE_TABLE
+        USER_ACCOUNT_TABLE, ORGANIZATION_TABLE, NOTE_TABLE, 
     );
 
     function __construct($stream, $options=array()) {

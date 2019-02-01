@@ -1469,6 +1469,10 @@ implements RestrictedAccess, Threadable {
         $fueRespondido=$this->isAnswered();
         $idSla=$this->getSLAId(); 
         $prioridad=$this->getPriorityId();
+        $vencido=$this->isOverdue();
+        if($vencido==true){
+            $this->$markOverdue(true);
+        }
         if($fueRespondido){
             if($idSla==3&&$prioridad==4)
             $this->setSLAId(4);
